@@ -8,8 +8,9 @@ label {
     color:rgb(25, 13, 152);
 }
 #add-button {
-    margin-bottom: 30px;
-    margin-top: 30px;
+    
+    max-width: 30%;
+    margin: 2rem auto;
 }
 #delete-button {
     float: right;
