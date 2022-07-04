@@ -50,9 +50,10 @@
         <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal" id="add-button">
             Add Task
         </button>
-        <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#taskListModal" id="getTaskList-button">
+        <button type="button" class="btn btn-primary" id="getTaskList-button">
           Get Task List
         </button>
+        
     </section>
   <!-- Modal for form-->
         <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -119,37 +120,19 @@
                 </div>
             </div>
         </div>
-     
-        <!--Modal for task List-->
-        <div class="modal fade" id="taskListModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-          <div class="modal-dialog modal-dialog-centered" role="document">
-            <div class="modal-content">
-              <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLongTitle">Task List</h5>
-                <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
-                  <span aria-hidden="true">&times;</span>
-                </button>
-              </div>
-              <div class="modal-body" id="#taskListGroup">
-                <!--Add List group --------------------------->
-                <section>
-                  <ul class="list-group" >
+        <section id="taskListGroup">
+          <ul>
 
-                  </ul>
-                </section>
-              </div>
-              <div class="modal-footer">
+          </ul>
 
-                <button type="button" class="btn btn-primary" data-bs-dismiss="modal">OK</button>
-              </div>
-            </div>
-          </div>
-        </div>
-
+        </section>
       <!-- Divs containing task cards-->
     <section id="cardContainer" class="container">
       
     </section>
+
+    
+
    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2" crossorigin="anonymous"></script>
    <script src="./JS/taskmanager.js"></script>
    <script src="./JS/script.js"></script>

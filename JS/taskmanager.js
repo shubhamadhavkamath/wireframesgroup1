@@ -63,15 +63,23 @@ class TaskManager {
             taskNameList.push(taskList[i].name);
         }
         console.log(taskNameList);
+        let unorderedList = document.getElementById('taskListGroup').firstElementChild;
+        unorderedList.innerHTML='';
+        
         
         for (let j=0; j < taskNameList.length; j++) {
             let l = document.createElement('li');
             l.classList.add('list-group-item');
             l.innerText = `${taskNameList[j]}`;
-            document.querySelector('#taskListGroup').appendChild(l);
             
+            unorderedList.appendChild(l);
         }
+       
+        
     }
+
+
+
     //Method to get tasks by status
 
     getTasksByStatus (status) {

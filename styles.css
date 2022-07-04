@@ -79,3 +79,7 @@ form {
     margin: 2rem auto;
     padding: 1rem;
 }
+#taskListGroup {
+    display: grid;
+    text-align: center;
+}

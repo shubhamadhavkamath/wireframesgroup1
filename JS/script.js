@@ -67,7 +67,13 @@ const validateDescription = () => {
 }
 descriptionInput.addEventListener('blur', validateDescription);
 
+
+
+
 /////////////////Date validation
+
+
+
 
 const dateValidation = () => {
   if (taskDate.value === '') {
