@@ -1,6 +1,6 @@
 
 let taskList = [];
-
+let tlg = document.getElementById('taskListGroup');
 class TaskManager {
     constructor(currentid, name, desc, assignee, due, tStatus, tpriority) {
         this.currentid= currentid;
@@ -12,6 +12,7 @@ class TaskManager {
          this.tpriority = tpriority;
     }
     
+    //Method to add and display tasks
 
     addingNewTask () {
         let newTask = {
@@ -34,7 +35,7 @@ class TaskManager {
                     <div class="card-text">
                         Task Name: ${newTask.name} <br>
                         Description: ${newTask.desc} <br> 
-                        Assignee: ${newTask.assignee} <br> 
+                        Assigned To: ${newTask.assignee} <br> 
                         Due Date: ${newTask.due} <br> 
                         Status: ${newTask.tStatus} <br> 
                         Priority: ${newTask.tpriority} <br>
@@ -62,13 +63,16 @@ class TaskManager {
             taskNameList.push(taskList[i].name);
         }
         console.log(taskNameList);
-        let tlg = document.getElementById('taskListGroup');
+        
         for (let j=0; j < taskNameList.length; j++) {
-            let taskListItem = document.createElement('li');
-            // taskListItem.classList.add('list-group-item');
-            document.getElementById('taskListGroup').appendChild(taskListItem).innerText = `${taskNameList[j]}`;
+            let l = document.createElement('li');
+            l.classList.add('list-group-item');
+            l.innerText = `${taskNameList[j]}`;
+            document.querySelector('#taskListGroup').appendChild(l);
+            
         }
     }
+    //Method to get tasks by status
 
     getTasksByStatus (status) {
         let taskListByStatus = [];

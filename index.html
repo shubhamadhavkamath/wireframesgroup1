@@ -74,6 +74,7 @@
                           <div class="form-group">
                               <label for="description">Task Description</label>
                               <input type="text" id="taskdescription" class="form-control" required>
+                              <div id="taskDescriptionErr" class="text-danger">Task description should be less than 15 characters</div>
                           </div>
                           <div class="form-group">
                               <label for="assignee">Assigned To:</label>
@@ -129,10 +130,10 @@
                   <span aria-hidden="true">&times;</span>
                 </button>
               </div>
-              <div class="modal-body">
+              <div class="modal-body" id="#taskListGroup">
                 <!--Add List group --------------------------->
                 <section>
-                  <ul class="list-group" id="#taskListGroup">
+                  <ul class="list-group" >
 
                   </ul>
                 </section>

@@ -33,6 +33,12 @@ form {
 #taskNameErr {
     display: none;
 }
+
+#taskDescriptionErr {
+    display: none;
+}
+
+
 #dateDisplay {
     display: grid;
     text-align: center;

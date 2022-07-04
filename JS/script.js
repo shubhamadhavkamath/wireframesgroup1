@@ -18,8 +18,10 @@ document.getElementById('dateDisplay').innerText= `Today is ${day}  ${thisMonth}
 
 const taskInput = document.getElementById('taskname');
 const nameValue = document.getElementById('taskname').value;
+const descriptionInput = document.getElementById('taskdescription');
 const descValue = document.getElementById('taskdescription').value;
 const assigneeValue = document.getElementById('assignee').value;
+const taskDate = document.querySelector('#taskdate');
 const dueValue = document.getElementById('taskdate').value;
 const statusValue = document.getElementById('status').value;
 const priorityValue = document.getElementById('priority').value;
@@ -43,47 +45,50 @@ taskInput.addEventListener('blur', validateName);
 
 
 
-// ---------------------------------------------More validation Just added---------------
+// ---------------------------------------------More validation---------------
 
 
 
 //Description validation
-// const descriptionInput = document.getElementById('taskdescription');
-// const validateDescription = () => {
-//     if(descriptionInput.value.length === 0) {
-//         descriptionInput.style.border = '1px solid red';
-//     } else if (descriptionInput.value.length > 15) {
-//         document.getElementById('taskDescriptionErr').style.display = 'block';
-//         descriptionInput.style.border = '1px solid red';
-//     } else {
-//         document.getElementById('taskDescriptionErr').style.display = 'none';
-//         descriptionInput.style.border = '1px solid #CED4DA';
-//     }
-// }
-// descriptionInput.addEventListener('blur', validateDescription);
 
-// //Date validation
-const taskDate = document.querySelector('#taskdate');
-// const dateValidation = () => {
-//   if (dueValue === '') {
-//     taskDate.style.border = '1px solid red'
-//     return
-//   }
-//   let inputDate = new Date(dueValue)
-//   let currentDate = new Date()
-//   currentDate.setHours(0, 0, 0, 0);
-//   if (inputDate < currentDate) {
-//     document.getElementById('dateErr').style.display = 'block';
-//     taskDate.style.border = '1px solid red'
-//   } else {
-//     document.getElementById('dateErr').style.display = 'none';
-//     taskDate.style.border = '1px solid #ced4da'
-//   }
+const validateDescription = () => {
 
-// }
-// taskDate.onblur = () => {
-//   dateValidation()
-// }
+    if(descriptionInput.value.length === 0) {
+        document.getElementById('taskDescriptionErr').style.display = 'none';
+        document.getElementById('submit-button').disabled= true;
+    } else if (descriptionInput.value.length > 15) {
+        document.getElementById('taskDescriptionErr').style.display = 'block';
+        descriptionInput.style.border = '1px solid red';
+        document.getElementById('submit-button').disabled= true;
+    } else {
+        document.getElementById('taskDescriptionErr').style.display = 'none';
+        descriptionInput.style.border = '1px solid #CED4DA';
+    }
+}
+descriptionInput.addEventListener('blur', validateDescription);
+
+/////////////////Date validation
+
+const dateValidation = () => {
+  if (taskDate.value === '') {
+    document.getElementById('submit-button').disabled= true;
+    document.getElementById('dateErr').style.display = 'none';
+  }
+  let inputDate = new Date(taskDate.value);
+  
+  if (inputDate < todaysDate) {
+    document.getElementById('dateErr').style.display = 'block';
+    taskDate.style.border = '1px solid red'
+    document.getElementById('submit-button').disabled= true;
+  } else {
+    document.getElementById('dateErr').style.display = 'none';
+    taskDate.style.border = '1px solid #ced4da';
+  }
+
+}
+taskDate.onblur = () => {
+  dateValidation()
+}
 
 
 
@@ -111,7 +116,8 @@ const validateForm = () => {
 //This validates the form when hovering over it 
 document.getElementById('thisForm').addEventListener('mouseover', validateForm);
 document.getElementById('thisForm').addEventListener('mouseover', validateName);
-
+document.getElementById('thisForm').addEventListener('mouseover', validateDescription);
+document.getElementById('thisForm').addEventListener('mouseover', dateValidation);
 
 
 //To reset the errors on modal dismissal 
@@ -120,7 +126,8 @@ const resetError = () => {
     document.getElementById('taskNameErr').style.display = 'none';
     document.getElementById('dateErr').style.display = 'none';
     taskInput.style.border = '1px solid #ced4da';
-    // taskDate.style.border = '1px solid #ced4da';
+    document.getElementById('taskDescriptionErr').style.display = 'none';
+    descriptionInput.style.border = '1px solid #CED4DA';
     // descriptionInput.style.border = '1px solid #CED4DA';
 
 }
