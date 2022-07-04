@@ -9,7 +9,7 @@ label {
 }
 #add-button {
     display: grid;
-    width: 30%;
+    width: 20%;
     margin: 2rem auto;
     padding: 1rem;
 }
@@ -50,4 +50,26 @@ form {
 .new-class {
     width: 50%;
     float: left;
+}
+.form-footer {
+    display: flex;
+  flex-wrap: wrap;
+  flex-shrink: 0;
+  align-items: center;
+  justify-content: flex-end;
+  padding: 0.75rem;
+  border-top: 1px solid #dee2e6;
+  border-bottom-right-radius: calc(0.3rem - 1px);
+  border-bottom-left-radius: calc(0.3rem - 1px);
+}
+
+/* #addFormButton {
+    display: grid;
+} */
+
+#getTaskList-button {
+    display: grid;
+    width: 20%;
+    margin: 2rem auto;
+    padding: 1rem;
 }

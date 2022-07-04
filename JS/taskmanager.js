@@ -1,5 +1,6 @@
 
 let taskList = [];
+
 class TaskManager {
     constructor(currentid, name, desc, assignee, due, tStatus, tpriority) {
         this.currentid= currentid;
@@ -42,14 +43,43 @@ class TaskManager {
                     </div>
                 </div>
             </div> `;
-      
+        
     
         const newDiv = document.createElement('div'); 
         newDiv.classList.add('new-class');
         document.getElementById('cardContainer').appendChild(newDiv);
         newDiv.innerHTML = taskHTML;
+        
     }
-    
+
+
+    //Method to get all tasks
+
+    getAllTasks () {
+        let taskNameList = [];
+        console.log(taskList.length);
+        for (let i=0; i < taskList.length; i++) {
+            taskNameList.push(taskList[i].name);
+        }
+        console.log(taskNameList);
+        let tlg = document.getElementById('taskListGroup');
+        for (let j=0; j < taskNameList.length; j++) {
+            let taskListItem = document.createElement('li');
+            // taskListItem.classList.add('list-group-item');
+            document.getElementById('taskListGroup').appendChild(taskListItem).innerText = `${taskNameList[j]}`;
+        }
+    }
+
+    getTasksByStatus (status) {
+        let taskListByStatus = [];
+        for (let k=0; k < taskList.length; k++) {
+            if(taskList[k].tStatus === status) {
+                taskListByStatus.push(taskList[k].name);
+            }
+        }
+        console.log(taskListByStatus);
+        return taskListByStatus;
+    }
     
 }
 
@@ -58,6 +88,16 @@ class TaskManager {
 function addTask () {
     let newTask = new TaskManager ();
     newTask.addingNewTask();
+}
+
+function getTaskNameList () {
+    let newTask = new TaskManager();
+    newTask.getAllTasks();
+}
+
+function getTasksByStatus (status) {
+    let newTask = new TaskManager ();
+    newTask.getTasksByStatus(status);
 }
 
 //function to reset form
@@ -76,6 +116,7 @@ document.getElementById('submit-button').addEventListener("click", addTask);
 document.getElementById('submit-button').addEventListener("click", formReset);
 document.getElementById('close-button').addEventListener("click", formReset);
 document.getElementById('add-button').addEventListener("click", formReset);
+document.getElementById('getTaskList-button').addEventListener("click", getTaskNameList);
 
 
 
