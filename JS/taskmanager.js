@@ -1,217 +1,87 @@
-
-let taskList = [];
-let tlg = document.getElementById('taskListGroup');
-class TaskManager {
-    constructor(currentid, name, desc, assignee, due, tStatus, tpriority) {
-        this.currentid= currentid;
-         this.name = name;
-         this.desc = desc;
-         this.assignee = assignee;
-         this.due = due;
-         this. tStatus = tStatus;
-         this.tpriority = tpriority;
-    }
-    
-    //Method to add and display tasks
-
-    addingNewTask () {
-        let newTask = {
-            name: document.querySelector('#taskname').value,
-            desc: document.getElementById('taskdescription').value,
-            assignee: document.getElementById('assignee').value,
-            due: document.getElementById('taskdate').value,
-            tStatus: document.getElementById('status').value,
-            tpriority: document.getElementById('priority').value
-        };
-        document.getElementById('submit-button').disabled = true;
-        taskList.push(newTask);
-    
-        console.log(taskList);
-        
-        const taskHTML = `
-            <div class = "card">
-                <div class="card-body">
-                    <div class="card-title"> <strong>Task ID:</strong> ${taskList.indexOf(newTask)+1}</div>
-                    <div class="card-text">
-                        Task Name: ${newTask.name} <br>
-                        Description: ${newTask.desc} <br> 
-                        Assigned To: ${newTask.assignee} <br> 
-                        Due Date: ${newTask.due} <br> 
-                        Status: ${newTask.tStatus} <br> 
-                        Priority: ${newTask.tpriority} <br>
-                        <a href="#" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">Edit</a>
-                        <a href="#" class="btn btn-primary">Delete</a>
-                    </div>
-                </div>
-            </div> `;
-        
-    
-        const newDiv = document.createElement('div'); 
-        newDiv.classList.add('new-class');
-        document.getElementById('cardContainer').appendChild(newDiv);
-        newDiv.innerHTML = taskHTML;
-        
-    }
-
-
-    //Method to get all tasks
-
-    getAllTasks () {
-        let taskNameList = [];
-        console.log(taskList.length);
-        for (let i=0; i < taskList.length; i++) {
-            taskNameList.push(taskList[i].name);
-        }
-        console.log(taskNameList);
-        let unorderedList = document.getElementById('taskListGroup').firstElementChild;
-        unorderedList.innerHTML='';
-        
-        
-        for (let j=0; j < taskNameList.length; j++) {
-            let l = document.createElement('li');
-            l.classList.add('list-group-item');
-            l.innerText = `${taskNameList[j]}`;
-            
-            unorderedList.appendChild(l);
-        }
-       
-        
-    }
-
-
-
-    //Method to get tasks by status
-
-    getTasksByStatus (status) {
-        let taskListByStatus = [];
-        for (let k=0; k < taskList.length; k++) {
-            if(taskList[k].tStatus === status) {
-                taskListByStatus.push(taskList[k].name);
-            }
-        }
-        console.log(taskListByStatus);
-        return taskListByStatus;
-    }
-    
-}
-
-//create a function to create new object and add it using the method addingnewtask
-
-function addTask () {
-    let newTask = new TaskManager ();
-    newTask.addingNewTask();
-}
-
-function getTaskNameList () {
-    let newTask = new TaskManager();
-    newTask.getAllTasks();
-}
-
-function getTasksByStatus (status) {
-    let newTask = new TaskManager ();
-    newTask.getTasksByStatus(status);
-}
-
-//function to reset form
-
-function formReset() {
-    let myForm = document.getElementById('thisForm');
-    myForm.reset();
-}
-
-
-
-
-//Event Listeners
-
-document.getElementById('submit-button').addEventListener("click", addTask);
-document.getElementById('submit-button').addEventListener("click", formReset);
-document.getElementById('close-button').addEventListener("click", formReset);
-document.getElementById('add-button').addEventListener("click", formReset);
-document.getElementById('getTaskList-button').addEventListener("click", getTaskNameList);
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-///////////////////////// This is what I started with(just for my future reference)
-// let taskList = [];
-
-// const  addingNewTask = () => {
-//     let newTask = {
-//         name: document.querySelector('#taskname').value,
-//         desc: document.getElementById('taskdescription').value,
-//         assignee: document.getElementById('assignee').value,
-//         due: document.getElementById('taskdate').value,
-//         tStatus: document.getElementById('status').value,
-//         tpriority: document.getElementById('priority').value
-//     };
-
-//     taskList.push(newTask);
-
-//     console.log(taskList);
-    
-//     const taskHTML = `<div class = "card">
-//         <div class="card-body">
-//             <div class="card-title">${newTask.name}</div>
-//             <div class="card-text">
-//                 Description: ${newTask.desc} <br> 
-//                 Assignee: ${newTask.assignee} <br> 
-//                 Due Date: ${newTask.due} <br> 
-//                 Status: ${newTask.tStatus} <br> 
-//                 Priority: ${newTask.tpriority} <br>
-//             </div>
-            
-//         </div>
-//     </div>`;
+// create Task Card HTML
+const createTaskHtml = (id, name, description, assignee, dueDate, status, priority) => {
+    const taskHtml = `
+    <div class="col-sm-6" id=${id}>
+    <div class="card">
+      <div class="card-body">
+        <h5 class="card-title">Task</h5>
+        <p class="card-text">
+          Task Name: ${name}
+          <br />
+          Description: ${description}
+          <br />
+          Assignee: ${assignee}
+          <br />
+          Date: ${dueDate}
+          <br />
+          Status: ${status}
+          <br />
+          Priority: ${priority}
+        </p>
+        <a
+          href="#"
+          class="btn btn-primary"
+          data-bs-toggle="modal"
+          data-bs-target="#exampleModal"
+          >Edit</a
+        >
+        <button class="btn btn-primary">Delete</button>
+        <button class="btn btn-primary done-button ${status === 'Done' ? 'invisible' : 'visible'}">Mark as done</button>  
+      </div>
+    </div>
+  </div>`
+    return taskHtml
+  }
   
-
-//     const newDiv = document.createElement('div');
-//     document.getElementById('cardContainer').appendChild(newDiv);
-//     newDiv.innerHTML = taskHTML;
-    
-// }
-
-
-
-
-
-
-
-
-
-
+  // The TaskManager Class
+  class TaskManager {
+    constructor(currentId = 0) {
+      this.currentId = currentId
+      this.tasks = []
+    }
+  
+    addTask(inputName, inputDescription, inputAssignee, inputDate, inputStatus = 'todo', inputPriority) {
+      let taskObject = {
+        id: this.currentId++,
+        name: inputName,
+        description: inputDescription,
+        assignedTo: inputAssignee,
+        dueDate: inputDate,
+        status: inputStatus,
+        priority: inputPriority
+      }
+      this.tasks.push(taskObject)
+    }
+  
+    getTaskById(taskId) {
+      let foundTask = this.tasks.filter(task => task.id === taskId)
+      return foundTask
+    }
+  
+    store() {
+      localStorage.setItem('currentId', JSON.stringify(this.currentId))
+      localStorage.setItem('tasks', JSON.stringify(this.tasks))
+    }
+  
+    load() {
+      if (localStorage.getItem('tasks')) {
+        this.tasks = JSON.parse(localStorage.getItem('tasks'))
+      }
+      if (localStorage.getItem('currentId')) {
+        this.currentId = Number(localStorage.getItem('currentId'))
+      }
+    }
+  
+    render(renderTasks) {
+      let tasksHtmlList = []
+      tasksHtmlList = renderTasks.map(task => {
+        let date = new Date(task.dueDate)
+        let formattedDate = (date.toLocaleDateString())
+        let taskHtml = createTaskHtml(task.id, task.name, task.description, task.assignedTo, formattedDate, task.status, task.priority)
+        return taskHtml
+      })
+      let tasksHtml = tasksHtmlList.join('\n')
+      const taskList = document.getElementById('taskList')
+      taskList.innerHTML = tasksHtml
+    }
+  }
