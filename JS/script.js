@@ -15,8 +15,7 @@ const filterStatus = document.getElementById('filter-status')
 const filterPriority = document.getElementById('filter-priority')
 const taskSubmit = document.getElementById('task-submit');
 const error = document.getElementById('submitErr');
-const taskList = document.getElementById('taskList')
-
+// const taskList = document.getElementById('taskList')
 
 //display Date function
 const displayDate = () => {
@@ -103,6 +102,11 @@ resetButton.onclick = (e) => {
   resetTask()
 }
 
+const cancelBtn = document.getElementById('cancel-button')
+cancelBtn.onclick = () => {
+  resetTask()
+}
+
 // filter function
 const filterTask = (filterCondition) => (
   taskManager.tasks.filter(task =>
@@ -123,7 +127,8 @@ filterPriority.onchange = (e) => {
   taskManager.render(filterResult)
 }
 
-
+//Mark as done and delete
+const taskList = document.getElementById('taskList')
 taskList.onclick = (e) => {
   if (e.target.classList.contains('done-button')) {
     let taskId = e.target.parentElement.parentElement.parentElement.id
@@ -132,10 +137,20 @@ taskList.onclick = (e) => {
     taskManager.store()
     taskManager.render(taskManager.tasks)
   }
+  if (e.target.classList.contains('delete-button')) {
+    if (confirm("Delete the task, Are you sure?")) {
+      let taskId = e.target.parentElement.parentElement.parentElement.id
+      taskManager.delete(Number(taskId))
+      taskManager.store()
+      taskManager.render(taskManager.tasks)
+    }
+  }
 }
 
+
 // Submit button validation
-const submit = () => {
+taskSubmit.onclick = (e) => {
+  e.preventDefault()
   const priority = document.getElementById('priority');
   const statusInput = document.getElementById('status');
   const assigneeInput = document.getElementById('assignee');
@@ -151,7 +166,4 @@ const submit = () => {
   } else {
     error.style.display = 'block';
   }
-}
-taskSubmit.onclick = () => {
-  submit()
 }
